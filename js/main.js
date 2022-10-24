@@ -607,3 +607,159 @@ console.log(carrito);
 /*for (const producto of carrito) {
     console.log(producto.nombre);
 }*/
+
+
+//CLASE 7 funciones de orden superior
+
+/*const productos = [
+    {id: 1, nombre:"Arroz", precio:130},
+    {id: 2, nombre:"Pan", precio:150},
+    {id: 3, nombre:"Tomate", precio:200},
+    {id: 4, nombre:"Salchicha", precio:80},
+    {id: 5, nombre:"Chocolate", precio:500},
+    {id: 6, nombre:"Fideos", precio:220},
+]
+
+const numeros = [1,2,3,4,5,6,7,8];
+
+function mayorQue(n){
+    return (m)=> m > n;
+}
+let mayorQueDiez = mayorQue(10);
+
+console.log(mayorQueDiez);
+
+console.log(mayorQueDiez(10));
+
+function calculo(op){
+    switch (op) {
+        case "+":
+            return (n1,n2) => n1 + n2;
+            break;
+
+        case "-":
+            return (n1,n2) => n1 - n2;
+            break;
+    
+        default:
+            return 0;
+            break;
+    }
+} */
+
+/*let suma=calculo("*");
+console.log(suma()); */
+
+//recibir funciones por parametro
+/*function porCadaUno(arr, fn){
+    for (const elemento of arr) {
+        fn(elemento);
+    }
+}
+
+let num=0
+function sumar(numero){
+    num = num + numero
+}
+
+porCadaUno(numeros, sumar);
+console.log(num);*/
+
+
+/*const triplicado = [];
+
+porCadaUno(numeros, (elemento)=>{
+    triplicado.push(elemento*3)
+})
+
+console.log(triplicado);*/
+
+//metodos, el primero es forEach, itera numeros, este foreach recibe una funcion flecha, la cual recibe un parametro
+/*numeros.forEach((num)=>{
+    console.log(num);
+})*/
+
+//find metodo para poder encontrar algo, el find devuelve el primero que encuentre, en caso de que en este caso los productos esten duplicados
+
+/*const encontraciones = productos.find((el)=> el.nombre === "Chocolate")
+console.log(encontraciones);
+
+
+//some funciona de la misma manera que la anterior, se pregunta si existe, lo devuelve con un true o con un false, no devuelve ningun producto en particular
+const existe = productos.some((el)=>{
+    return el.precio === 500
+})
+
+console.log(existe);
+
+//map crea un nuevo array
+const nombres = productos.map((producto)=>{
+    return { id: producto.id,
+        nombre: producto.nombre,
+        precio: producto.precio * 1.15
+    }
+  })
+
+console.log(nombres);*/
+/*
+//filter funciona similar al metodo map
+const filtrado= productos.filter((el)=>{
+    return el.precio > 150
+})
+  
+console.log(filtrado);
+  
+//reduce nos sirve para poder hacer una suma acumulada de todos los elementos recibe otro parametro que es un numero, acc(acumulador), el(elementos), el 0 es desde donde va a empezar a contar el acumulador
+  
+const total= numeros.reduce((acc, el)=>{
+return acc + el;
+},0)
+  
+const totalCompra= productos.reduce((acc,el)=>{
+return acc + el.precio
+},0)
+  
+console.log(totalCompra);
+
+  
+//sort nos permite ordenar de acuerdo a un criterio que hayamos seleccionado, lo que este metodo hace es modificar el array original, es un metodo "destructivo"
+const nums=[-9,0,23,33,-12];
+console.log(nums);
+nums.sort((a,b)=> b - a);
+console.log(nums);
+//DATE manejo de fechas
+const date = new Date();
+console.log(date.getDate()+"/"+(date.getMonth() +1));
+console.log(date.toDateString());
+console.log(date.toLocaleString());
+console.log(date.toLocaleDateString()); */
+
+
+//CLASE 8
+//para trabajar con el DOM se le llama document, para acceder a todas las propiedades de nuestro html, cada etiqueta del html se vuelve un elemento.
+//vamos a utilizar console.dir, el objeto document tiene un monton de parametros, con el punto se puede acceder a los distintos objetos
+//un log en cambio me da la estructura html, los id's son muy practicos para trabajar con esto
+/* console.dir(document)
+console.dir(document.head)
+console.dir(document.body) */
+//getElementById va a llamar solamente id's de mi html, no tenemos que crear varios const, podemos separarlo mediante comas y realizar otro titulo el cual tambien va a ser una constante, getelementbyclassname es la que llama a las clases, getelementbytagname trabaja de la misma forma que el classname
+//HTMLCollection se comporta como un array
+const span = document.getElementById("Curso"), titulo=document.getElementById("Titulo"), h1=document.getElementsByClassName("Modificacion"),
+paises=document.getElementsByTagName("li"),
+contenedor=document.getElementsByTagName("main")[0];
+console.log(span);
+console.log(titulo);
+/* console.log(h1[0]);
+console.log(paises[2]); */
+//se puede iterar con un for of
+for (const pais of paises) {
+    console.log(pais.innerText);
+}
+//hay una propiedad que se llama innertext, modifica la etiqueta y el contenido, con el contenido en este caso el texto que tenemos, a traves de esta propiedad puedo modificar mi html y asignarle un nuevo valor 
+//lo ideal es llamar una clase a la cual voy a modificar constantemente, como una forma de un contenido dinamico, que este cambiando durante todo el tiempo, solo lo llamo en el html, el resto del codigo no lo ingreso en esa parte del html, porque no necesito que sea dinamico.
+paises[0].innerText="Paraguay";
+titulo.innerText="No sigas las instrucciones"
+//con innerhtml puedo modificar el html con etiquetas nuevas
+paises[0].innerHTML="<h4>Tanzania</h4> <p>Esta cosa esta mortal</p>";
+//con classname llamo a un clase que pertenece a css, no es recomendable, lo podemos hacer en el body o en el html
+contenedor.className="container";
